@@ -43,8 +43,9 @@ export default function useLoadImages({queryInput, page}: Props) {
         fetchData().then(r => {
                 if (r?.data) {
                     setImages(r.data.map((image: GiphyImage) => image.images.downsized_medium.url));
+                    setLoading(false);
                 }
-            setLoading(false);
+
             }
         );
     }, [queryInput, page]);
