@@ -11,6 +11,24 @@ export default function Homepage() {
     const [imageTextPosition, setImageTextPosition] = useState(Position.Top);
     const images = useLoadImages({queryInput});
 
+    function positionClass(): string {
+        switch (imageTextPosition) {
+            case Position.Top:
+                return ("top-[5px]" + otherStyling);
+
+            case Position.Bottom:
+                return ("bottom-[5px]" + otherStyling);
+
+            case Position.Below:
+                return otherStyling;
+
+            default:
+                return otherStyling;
+        }
+    }
+
+    const otherStyling = " bg-black/50 absolute right-1/2"
+
     return (
         <main className="m-8">
             <QuerySection
@@ -22,11 +40,19 @@ export default function Homepage() {
                 imageTextPosition={imageTextPosition}
             />
 
+
             <ul className="flex flex-col md:flex-row mt-4 w-full">
-                {images &&
-                    images.images.map((image, index) => (
-                        <li key={index}>
+                {images.images.map((image, index) => (
+                        <li key={index} className="relative h-full">
                             <img src={image}  />
+                            {imageText === "" ?
+                                <div></div>
+                                : <div className={positionClass()}
+
+                                >
+                                    {imageText}
+                                </div>
+                            }
                         </li>
                     ))
                 }
