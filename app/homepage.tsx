@@ -22,13 +22,15 @@ export default function Homepage() {
                 imageTextPosition={imageTextPosition}
             />
 
-            <div className="flex flex-col md:flex-row mt-4 w-full">
+            <ul className="flex flex-col md:flex-row mt-4 w-full">
                 {images &&
                     images.images.map((image, index) => (
-                        <img src={image} key={index} />
+                        <li key={index}>
+                            <img src={image}  />
+                        </li>
                     ))
                 }
-            </div>
+            </ul>
 
         </main>
     )
