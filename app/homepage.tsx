@@ -9,7 +9,8 @@ export default function Homepage() {
     const [queryInput, setQueryInput] = useState("");
     const [imageText, setImageText] = useState("");
     const [imageTextPosition, setImageTextPosition] = useState(Position.Top);
-    const images = useLoadImages({queryInput});
+    const [page, setPage] = useState(0);
+    const images = useLoadImages({queryInput, page});
 
     function positionClass(): string {
         switch (imageTextPosition) {
@@ -41,15 +42,13 @@ export default function Homepage() {
             />
 
 
-            <ul className="flex flex-col md:flex-row mt-4 w-full">
+            <ul className="flex flex-col md:flex-row mt-4 w-full h-full">
                 {images.images.map((image, index) => (
                         <li key={index} className="relative h-full">
-                            <img src={image}  />
+                            <img src={image}/>
                             {imageText === "" ?
                                 <div></div>
-                                : <div className={positionClass()}
-
-                                >
+                                : <div className={positionClass()}>
                                     {imageText}
                                 </div>
                             }
@@ -57,6 +56,17 @@ export default function Homepage() {
                     ))
                 }
             </ul>
+
+            {images.images.length == 0 ?
+                null
+                : <section className="flex flex-row mt-4 w-full justify-center gap-2">
+                    <button onClick={()=> setPage(page - 1)} disabled={page == 0} className={"cursor-pointer"}>Left</button>
+                    <button onClick={()=> setPage(page + 1)} className={"cursor-pointer"}>Right</button>
+                </section>
+
+
+            }
+
 
         </main>
     )

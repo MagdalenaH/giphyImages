@@ -57,7 +57,7 @@ export default function QuerySection({queryInput, setQueryInput, imageText, setI
                 />
             </div>
             <div>
-                <h2>Image text positioning</h2>
+                <h2>Text position</h2>
                 <select
                     value={imageTextPosition}
                     onChange={(e) => stringToPosition(e.target.value)}
